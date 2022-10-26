@@ -7,7 +7,11 @@
 
 const AUTH_KEY = "YOUR_API_KEY_HERE"; // Your Youtube API key. To get one, see https://developers.google.com/youtube/v3/getting-started
 const VIDEO_COUNT = 6; // The number of videos to retrieve in the API call.
-const PLAYLIST = "YOUR_PLAYLIST_HERE"; // The playlist ID to retrieve videos from
+
+// The playlist ID to retrieve videos from. 
+// To get all videos from a channel, use their uploads playlist:
+// replace the "UC" at the beginning of the channel ID with "UU" for the uploads playlist ID.
+const PLAYLIST = "YOUR_PLAYLIST_HERE"; 
 
 // The id of the parent element where you want the video tiles to go.
 const PARENT_ID = "video-container";
