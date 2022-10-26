@@ -11,8 +11,10 @@ const PLAYLIST = "YOUR_PLAYLIST_HERE"; // The playlist ID to retrieve videos fro
 
 // The id of the parent element where you want the video tiles to go.
 const PARENT_ID = "video-container";
+
 // The id of the loading graphic that should disappear when videos load.
 const LOADING_ID = "videos-loading";
+
 // The following are the CSS classes that will be assigned to
 // parts of every video's tile on the webpage.
 const TILE_CLASS = "video-tile";
@@ -33,7 +35,7 @@ const THUMBNAIL_QUALITY = "standard";
  * @return The created XMLHttpRequest
  */
 function createHttpRequest(url) {
-    let req = new XMLHttpRequest();
+    const req = new XMLHttpRequest();
     req.open("GET", url);
     return req;
 }
@@ -43,32 +45,32 @@ function createHttpRequest(url) {
  * @param {Object} video 
  */
 function makeSingleVideoTile(video) {
-    let videoData = video.snippet;
+    const videoData = video.snippet;
 
     // Create the parent "tile" element
-    let tile = document.createElement("div");
+    const tile = document.createElement("div");
     tile.classList.add(TILE_CLASS);
 
     // Create the link that goes over the title and thumbnail.
-    let link = document.createElement("a");
+    const link = document.createElement("a");
     link.href = `https://youtu.be/${videoData.resourceId.videoId}`;
     link.classList.add(LINK_CLASS);
     tile.appendChild(link);
 
     // Create the span element that contains the title of the video.
-    let heading = document.createElement("span");
+    const heading = document.createElement("span");
     heading.classList.add(HEADER_CLASS);
     heading.innerText = videoData.title;
     link.appendChild(heading);
 
     // Create the img element for the thumbnail.
-    let thumbnail = document.createElement("img");
+    const thumbnail = document.createElement("img");
     thumbnail.classList.add(THUMBNAIL_CLASS);
     thumbnail.src = videoData.thumbnails[THUMBNAIL_QUALITY].url;
     link.appendChild(thumbnail);
 
     // Create the span element that contains the description.
-    let description = document.createElement("span");
+    const description = document.createElement("span");
     description.classList.add(DESCRIPTION_CLASS);
     description.innerText = videoData.description;
     link.appendChild(description);
@@ -85,7 +87,7 @@ function makeVideoTiles(json) {
     // First, make the loading element invisible.
     document.getElementById(LOADING_ID).style.display = "none";
     // Parse the raw JSON
-    let videoData = JSON.parse(json);
+    const videoData = JSON.parse(json);
     // Make a tile for each video.
     videoData.items.forEach(makeSingleVideoTile);
 }
@@ -95,7 +97,7 @@ function makeVideoTiles(json) {
  * Calls makeVideoTiles when Request loads.
  */
 function getVideos() {
-    let request = createHttpRequest(
+    const request = createHttpRequest(
         `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${VIDEO_COUNT}&playlistId=${PLAYLIST}&key=${AUTH_KEY}`
     );
 
